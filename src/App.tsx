@@ -1,6 +1,6 @@
 import './App.css';
-import { Header } from './components/header';
-import { Transform } from './components/transform';
+import { Header } from './pages/header';
+import { Transform } from './pages/transform';
 
 function App() {
   return (

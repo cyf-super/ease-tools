@@ -1,29 +1,37 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@types/is-hotkey': ^0.1.10
   '@types/react': ^18.2.37
   '@types/react-dom': ^18.2.15
   '@typescript-eslint/eslint-plugin': ^6.10.0
   '@typescript-eslint/parser': ^6.10.0
   '@vitejs/plugin-react-swc': ^3.5.0
+  clsx: ^2.0.0
   eslint: ^8.53.0
   eslint-plugin-react-hooks: ^4.6.0
   eslint-plugin-react-refresh: ^0.4.4
+  is-hotkey: ^0.2.0
   react: ^18.2.0
   react-dom: ^18.2.0
   sass: ^1.69.5
   slate: ^0.101.1
+  slate-history: ^0.100.0
   slate-react: ^0.101.2
   typescript: ^5.2.2
   vite: ^5.0.0
 
 dependencies:
+  clsx: 2.0.0
+  is-hotkey: 0.2.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   slate: 0.101.1
+  slate-history: 0.100.0_slate@0.101.1
   slate-react: 0.101.2_5obtbdzm4mjeufisxh27rjj4zi
 
 devDependencies:
+  '@types/is-hotkey': 0.1.10
   '@types/react': 18.2.42
   '@types/react-dom': 18.2.17
   '@typescript-eslint/eslint-plugin': 6.13.2_7tttfxh7kxoebuxieigkbisq5a
@@ -534,7 +542,6 @@ packages:
 
   /@types/is-hotkey/0.1.10:
     resolution: {integrity: sha512-RvC8KMw5BCac1NvRRyaHgMMEtBaZ6wh0pyPTBu7izn4Sj/AX9Y4aXU5c7rX8PnM/knsuUpC1IeoBkANtxBypsQ==}
-    dev: false
 
   /@types/json-schema/7.0.15:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
@@ -818,6 +825,11 @@ packages:
     optionalDependencies:
       fsevents: 2.3.3
     dev: true
+
+  /clsx/2.0.0:
+    resolution: {integrity: sha512-rQ1+kcj+ttHG0MKVGBUXwayCCF1oh39BF5COIpRzuCEv8Mwjv0XucrI2ExNTOn9IlLifGClWQcU9BrZORvtw6Q==}
+    engines: {node: '>=6'}
+    dev: false
 
   /color-convert/2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
@@ -1547,6 +1559,15 @@ packages:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
     dev: true
+
+  /slate-history/0.100.0_slate@0.101.1:
+    resolution: {integrity: sha512-x5rUuWLNtH97hs9PrFovGgt3Qc5zkTm/5mcUB+0NR/TK923eLax4HsL6xACLHMs245nI6aJElyM1y6hN0y5W/Q==}
+    peerDependencies:
+      slate: '>=0.65.3'
+    dependencies:
+      is-plain-object: 5.0.0
+      slate: 0.101.1
+    dev: false
 
   /slate-react/0.101.2_5obtbdzm4mjeufisxh27rjj4zi:
     resolution: {integrity: sha512-Jirty7d+tP8Cb+g8KrGUE7HvdC1z1jiysfdad2fTKIyXOrAq30cx4De+JzjfWDuB3LJDriu+Ii4PYXva3mKlhg==}
