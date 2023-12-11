@@ -19,6 +19,7 @@ specifiers:
   slate: ^0.101.1
   slate-history: ^0.100.0
   slate-react: ^0.101.2
+  sonner: ^1.2.4
   typescript: ^5.2.2
   vite: ^5.0.0
 
@@ -30,6 +31,7 @@ dependencies:
   slate: 0.101.1
   slate-history: 0.100.0_slate@0.101.1
   slate-react: 0.101.2_5obtbdzm4mjeufisxh27rjj4zi
+  sonner: registry.npmmirror.com/sonner/1.2.4_biqbaboplfbrettd7655fr4n2y
 
 devDependencies:
   '@types/is-hotkey': 0.1.10
@@ -2145,6 +2147,19 @@ packages:
     version: 6.3.1
     hasBin: true
     dev: true
+
+  registry.npmmirror.com/sonner/1.2.4_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-WGLP2QQnomgewaCTsK7YWiLcy5n1Yj83vsL5cP4zHMmpSkmFsCYTpQKhlXJrPE5kzjwbqCkCFXcOpbKc4vaUaA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/sonner/-/sonner-1.2.4.tgz}
+    id: registry.npmmirror.com/sonner/1.2.4
+    name: sonner
+    version: 1.2.4
+    peerDependencies:
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
 
   registry.npmmirror.com/strip-outer/1.0.1:
     resolution: {integrity: sha512-k55yxKHwaXnpYGsOzg4Vl8+tDrWylxDEpknGjhTiZB8dFRU5rTo9CAzeycivxV3s+zlTKwrs6WxMxR95n26kwg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/strip-outer/-/strip-outer-1.0.1.tgz}

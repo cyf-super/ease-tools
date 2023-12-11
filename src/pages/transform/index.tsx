@@ -4,7 +4,7 @@ import { BaseButton } from '@/components';
 import { useTransform } from './hooks/useTransform';
 
 export function Transform() {
-  const { textHtml, onReset, onTransform, editChange, changeTextArea } =
+  const { textHtml, onReset, onTransform, editChange, changeTextArea, onCopy } =
     useTransform();
 
   return (
@@ -17,7 +17,7 @@ export function Transform() {
         <BaseButton active className="btn-texthtml" onClick={onTransform}>
           To textHtml
         </BaseButton>
-        <BaseButton active className="btn-copy" onClick={onTransform}>
+        <BaseButton active className="btn-copy" onClick={onCopy}>
           Copy
         </BaseButton>
       </div>

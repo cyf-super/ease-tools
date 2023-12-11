@@ -13,6 +13,7 @@
   -moz-osx-font-smoothing: grayscale;
 
   --btnColor: rgb(71, 75, 255);
+  --borderColor: #a3a5ff;
 }
 
 html,

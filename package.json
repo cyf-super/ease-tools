@@ -17,7 +17,8 @@
     "react-dom": "^18.2.0",
     "slate": "^0.101.1",
     "slate-history": "^0.100.0",
-    "slate-react": "^0.101.2"
+    "slate-react": "^0.101.2",
+    "sonner": "^1.2.4"
   },
   "devDependencies": {
     "@types/is-hotkey": "^0.1.10",
