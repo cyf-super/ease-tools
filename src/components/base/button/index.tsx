@@ -4,15 +4,11 @@ import styles from './style.module.scss';
 import clsx from 'clsx';
 
 type ButtonType = PropsWithChildren<{
-  active: boolean;
+  active?: boolean;
 }> &
   BaseProps;
 
-export const BaseButton = function ({
-  className,
-  active,
-  ...props
-}: ButtonType) {
+export const BaseButton = function ({ className, ...props }: ButtonType) {
   return (
     <button
       {...props}

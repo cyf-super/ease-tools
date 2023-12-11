@@ -9,13 +9,13 @@ function getDomByText(text: string, type: keyof typeof STYLE_TYPE) {
   return `<${ele}>${text}</${ele}>`;
 }
 
-export function textToTextHtml(descendant: any, isSimple = true) {
-  const textHtml = descendant.map(item => {
+export function textToTextHtml(descendant: unknown, isSimple = true) {
+  const textHtml = (descendant as Descendant[]).map(item => {
     let text = item.children.reduce((htmlText, paragraph) => {
       let text = paragraph.text;
       for (const key of Object.keys(paragraph)) {
-        if (STYLE_TYPE[key]) {
-          text = getDomByText(text, key);
+        if (STYLE_TYPE[key as keyof typeof STYLE_TYPE]) {
+          text = getDomByText(text, key as keyof typeof STYLE_TYPE);
         }
       }
       return (htmlText += text), htmlText;

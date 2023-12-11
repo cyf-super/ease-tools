@@ -5,7 +5,7 @@ import { Descendant } from 'slate';
 export function useTransform() {
   const [descendant, setDescendant] = useState<Descendant[]>([]);
   const [textHtml, setTextHtml] = useState('');
-  const [textHtmlMode, settextHtmlMode] = useState('simple');
+  const [textHtmlMode] = useState('simple');
 
   const onReset = useCallback(() => {
     setDescendant([]);
@@ -17,7 +17,7 @@ export function useTransform() {
   }, [descendant, textHtmlMode]);
 
   const editChange = useCallback(
-    val => {
+    (val: Descendant[]) => {
       setDescendant(val);
     },
     [setDescendant]

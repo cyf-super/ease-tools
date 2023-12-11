@@ -6,8 +6,6 @@
     "moduleResolution": "Node"
     // "esModuleInterop": true
   },
-  "angularCompilerOptions": {
-    // "allowSyntheticDefaultImports": true
-  },
+  "angularCompilerOptions": {},
   "include": ["vite.config.ts"]
 }

@@ -1,12 +1,20 @@
-import React, { useCallback, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import isHotkey from 'is-hotkey';
-import { Editable, withReact, useSlate, Slate } from 'slate-react';
+import {
+  Editable,
+  withReact,
+  useSlate,
+  Slate,
+  RenderElementProps,
+  RenderLeafProps
+} from 'slate-react';
 import {
   Editor,
   Transforms,
   createEditor,
   Descendant,
-  Element as SlateElement
+  Element as SlateElement,
+  BaseEditor
 } from 'slate';
 import { withHistory } from 'slate-history';
 import { Button, Icon, Toolbar } from '@/components';
@@ -17,14 +25,20 @@ const HOTKEYS = {
   'mod+i': 'italic',
   'mod+u': 'underline',
   'mod+`': 'code'
-};
+} as const;
 
 const LIST_TYPES = ['numbered-list', 'bulleted-list'];
 const TEXT_ALIGN_TYPES = ['left', 'center', 'right', 'justify'];
 
 const Edit = ({ onChange }: { onChange: (value: Descendant[]) => void }) => {
-  const renderElement = useCallback(props => <Element {...props} />, []);
-  const renderLeaf = useCallback(props => <Leaf {...props} />, []);
+  const renderElement = useCallback(
+    (props: RenderElementProps) => <Element {...props} />,
+    []
+  );
+  const renderLeaf = useCallback(
+    (props: RenderLeafProps) => <Leaf {...props} />,
+    []
+  );
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 
   return (
@@ -54,7 +68,7 @@ const Edit = ({ onChange }: { onChange: (value: Descendant[]) => void }) => {
           for (const hotkey in HOTKEYS) {
             if (isHotkey(hotkey, event as any)) {
               event.preventDefault();
-              const mark = HOTKEYS[hotkey];
+              const mark = HOTKEYS[hotkey as keyof typeof HOTKEYS];
               toggleMark(editor, mark);
             }
           }
@@ -64,7 +78,7 @@ const Edit = ({ onChange }: { onChange: (value: Descendant[]) => void }) => {
   );
 };
 
-const toggleBlock = (editor, format) => {
+const toggleBlock = (editor: BaseEditor, format: string) => {
   const isActive = isBlockActive(
     editor,
     format,
@@ -76,11 +90,11 @@ const toggleBlock = (editor, format) => {
     match: n =>
       !Editor.isEditor(n) &&
       SlateElement.isElement(n) &&
-      LIST_TYPES.includes(n.type) &&
+      LIST_TYPES.includes((n as any).type) &&
       !TEXT_ALIGN_TYPES.includes(format),
     split: true
   });
-  let newProperties: Partial<SlateElement>;
+  let newProperties: any;
   if (TEXT_ALIGN_TYPES.includes(format)) {
     newProperties = {
       align: isActive ? undefined : format
@@ -98,7 +112,7 @@ const toggleBlock = (editor, format) => {
   }
 };
 
-const toggleMark = (editor, format) => {
+const toggleMark = (editor: BaseEditor, format: string) => {
   const isActive = isMarkActive(editor, format);
 
   if (isActive) {
@@ -108,29 +122,33 @@ const toggleMark = (editor, format) => {
   }
 };
 
-const isBlockActive = (editor, format, blockType = 'type') => {
+const isBlockActive = (
+  editor: BaseEditor,
+  format: string,
+  blockType: (typeof TEXT_ALIGN_TYPES)[number] = 'type'
+) => {
   const { selection } = editor;
   if (!selection) return false;
 
   const [match] = Array.from(
     Editor.nodes(editor, {
       at: Editor.unhangRange(editor, selection),
-      match: n =>
+      match: (n: unknown) =>
         !Editor.isEditor(n) &&
         SlateElement.isElement(n) &&
-        n[blockType] === format
+        (n as any)[blockType] === format
     })
   );
 
   return !!match;
 };
 
-const isMarkActive = (editor, format) => {
-  const marks = Editor.marks(editor);
+const isMarkActive = (editor: BaseEditor, format: string) => {
+  const marks = Editor.marks(editor) as any;
   return marks ? marks[format] === true : false;
 };
 
-const Element = ({ attributes, children, element }) => {
+const Element = ({ attributes, children, element }: any) => {
   const style = { textAlign: element.align };
   switch (element.type) {
     case 'block-quote':
@@ -178,7 +196,7 @@ const Element = ({ attributes, children, element }) => {
   }
 };
 
-const Leaf = ({ attributes, children, leaf }) => {
+const Leaf = ({ attributes, children, leaf }: any) => {
   if (leaf.bold) {
     children = <strong>{children}</strong>;
   }
@@ -198,7 +216,7 @@ const Leaf = ({ attributes, children, leaf }) => {
   return <span {...attributes}>{children}</span>;
 };
 
-const BlockButton = ({ format, icon }) => {
+const BlockButton = ({ format, icon }: { format: string; icon: string }) => {
   const editor = useSlate();
   return (
     <Button
@@ -207,7 +225,7 @@ const BlockButton = ({ format, icon }) => {
         format,
         TEXT_ALIGN_TYPES.includes(format) ? 'align' : 'type'
       )}
-      onMouseDown={event => {
+      onMouseDown={(event: Event) => {
         event.preventDefault();
         toggleBlock(editor, format);
       }}
@@ -217,12 +235,12 @@ const BlockButton = ({ format, icon }) => {
   );
 };
 
-const MarkButton = ({ format, icon }) => {
+const MarkButton = ({ format, icon }: { format: string; icon: string }) => {
   const editor = useSlate();
   return (
     <Button
       active={isMarkActive(editor, format)}
-      onMouseDown={event => {
+      onMouseDown={(event: Event) => {
         event.preventDefault();
         toggleMark(editor, format);
       }}
@@ -232,7 +250,7 @@ const MarkButton = ({ format, icon }) => {
   );
 };
 
-const initialValue: Descendant[] = [
+const initialValue: any = [
   {
     type: 'paragraph',
     children: [
