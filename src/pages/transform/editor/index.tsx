@@ -30,7 +30,15 @@ const HOTKEYS = {
 const LIST_TYPES = ['numbered-list', 'bulleted-list'];
 const TEXT_ALIGN_TYPES = ['left', 'center', 'right', 'justify'];
 
-const Edit = ({ onChange }: { onChange: (value: Descendant[]) => void }) => {
+const Edit = ({
+  onChange,
+  descendant,
+  editor
+}: {
+  onChange: (value: Descendant[]) => void;
+  descendant: Descendant[];
+  editor: BaseEditor;
+}) => {
   const renderElement = useCallback(
     (props: RenderElementProps) => <Element {...props} />,
     []
@@ -39,10 +47,13 @@ const Edit = ({ onChange }: { onChange: (value: Descendant[]) => void }) => {
     (props: RenderLeafProps) => <Leaf {...props} />,
     []
   );
-  const editor = useMemo(() => withHistory(withReact(createEditor())), []);
+
+  useMemo(() => {
+    Transforms.select(editor, { offset: 0, path: [0, 0] });
+  }, [editor]);
 
   return (
-    <Slate editor={editor} initialValue={initialValue} onChange={onChange}>
+    <Slate editor={editor} initialValue={descendant} onChange={onChange}>
       <Toolbar>
         <MarkButton format="bold" icon="format_bold" />
         <MarkButton format="italic" icon="format_italic" />
@@ -56,7 +67,7 @@ const Edit = ({ onChange }: { onChange: (value: Descendant[]) => void }) => {
         <BlockButton format="left" icon="format_align_left" />
         <BlockButton format="center" icon="format_align_center" />
         <BlockButton format="right" icon="format_align_right" />
-        <BlockButton format="justify" icon="format_align_justify" />
+        {/* <BlockButton format="justify" icon="format_align_justify" /> */}
       </Toolbar>
       <Editable
         renderElement={renderElement}
@@ -219,7 +230,7 @@ const Leaf = ({ attributes, children, leaf }: any) => {
 const BlockButton = ({ format, icon }: { format: string; icon: string }) => {
   const editor = useSlate();
   return (
-    <Button
+    <Icon
       active={isBlockActive(
         editor,
         format,
@@ -229,60 +240,29 @@ const BlockButton = ({ format, icon }: { format: string; icon: string }) => {
         event.preventDefault();
         toggleBlock(editor, format);
       }}
-    >
-      <Icon>{icon}</Icon>
-    </Button>
+      icon={icon}
+    ></Icon>
   );
 };
 
 const MarkButton = ({ format, icon }: { format: string; icon: string }) => {
   const editor = useSlate();
   return (
-    <Button
+    <Icon
       active={isMarkActive(editor, format)}
       onMouseDown={(event: Event) => {
         event.preventDefault();
         toggleMark(editor, format);
       }}
-    >
-      <Icon>{icon}</Icon>
-    </Button>
+      icon={icon}
+    ></Icon>
   );
 };
 
 const initialValue: any = [
   {
     type: 'paragraph',
-    children: [
-      { text: 'This is editable ' },
-      { text: 'rich', bold: true },
-      { text: ' text, ' },
-      { text: 'much', italic: true },
-      { text: ' better than a ' },
-      { text: '<textarea>', code: true },
-      { text: '!' }
-    ]
-  },
-  {
-    type: 'paragraph',
-    children: [
-      {
-        text: "Since it's rich text, you can do things like turn a selection of text "
-      },
-      { text: 'bold', bold: true },
-      {
-        text: ', or add a semantically rendered block quote in the middle of the page, like this:'
-      }
-    ]
-  },
-  {
-    type: 'block-quote',
-    children: [{ text: 'A wise quote.' }]
-  },
-  {
-    type: 'paragraph',
-    align: 'center',
-    children: [{ text: 'Try it out for yourself!' }]
+    children: [{ text: '1241234' }]
   }
 ];
 

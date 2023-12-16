@@ -8,11 +8,15 @@ type ButtonType = PropsWithChildren<{
 }> &
   BaseProps;
 
-export const BaseButton = function ({ className, ...props }: ButtonType) {
+export const BaseButton = function ({
+  className,
+  disabled,
+  ...props
+}: ButtonType) {
   return (
     <button
       {...props}
-      className={clsx(styles.button, className)}
+      className={clsx(styles.button, className, disabled)}
       style={{}}
     ></button>
   );

@@ -5,13 +5,32 @@ import styles from '../style.module.scss';
 
 export const Icon = forwardRef(
   (
-    { className, ...props }: PropsWithChildren<BaseProps>,
-    ref: Ref<HTMLSpanElement>
-  ) => (
-    <span
-      {...props}
-      ref={ref}
-      className={clsx('material-icons', className, styles.icon)}
-    />
-  )
+    {
+      className,
+      icon,
+      reversed,
+      active,
+      ...props
+    }: PropsWithChildren<BaseProps>,
+    ref: Ref<HTMLImageElement>
+  ) => {
+    const src = new URL(`./icons/${icon}.svg`, import.meta.url).href;
+    return (
+      <span
+        {...props}
+        ref={ref}
+        className={clsx('material-icons', className, styles.icon)}
+        style={{
+          WebkitMask: `url(${src}) center/100% no-repeat`,
+          background: reversed
+            ? active
+              ? 'white'
+              : '#aaa'
+            : active
+            ? 'black'
+            : '#ccc'
+        }}
+      />
+    );
+  }
 );

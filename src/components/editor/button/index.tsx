@@ -22,7 +22,7 @@ export const Button = forwardRef(
       ref={ref}
       className={clsx(className)}
       style={{
-        color: reversed
+        background: reversed
           ? active
             ? 'white'
             : '#aaa'

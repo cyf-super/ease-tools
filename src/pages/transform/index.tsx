@@ -4,12 +4,20 @@ import { BaseButton } from '@/components';
 import { useTransform } from './hooks/useTransform';
 
 export function Transform() {
-  const { textHtml, onReset, onTransform, editChange, changeTextArea, onCopy } =
-    useTransform();
+  const {
+    editor,
+    descendant,
+    textHtml,
+    onTransform,
+    editChange,
+    changeTextArea,
+    onCopy,
+    onReset
+  } = useTransform();
 
   return (
     <div className={styles.box}>
-      <Edit onChange={editChange} />
+      <Edit onChange={editChange} descendant={descendant} editor={editor} />
       <div className="btn">
         <BaseButton active onClick={onReset}>
           Reset

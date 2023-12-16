@@ -10,6 +10,7 @@
   }
   [role='textbox'] {
     overflow-y: scroll;
+    overflow-x: hidden;
     height: 320px;
     width: 100%;
     border: 1px solid rgb(225, 225, 239);

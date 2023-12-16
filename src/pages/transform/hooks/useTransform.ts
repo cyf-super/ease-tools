@@ -1,16 +1,33 @@
 import { textToTextHtml } from '@/pages/utils';
-import { useState, useCallback, ChangeEvent } from 'react';
+import { useState, useMemo, useCallback, ChangeEvent } from 'react';
 import { Descendant } from 'slate';
 import { toast } from 'sonner';
+import { withReact } from 'slate-react';
+import { createEditor, Transforms } from 'slate';
+import { withHistory } from 'slate-history';
 
 export function useTransform() {
-  const [descendant, setDescendant] = useState<Descendant[]>([]);
+  const [descendant, setDescendant] = useState<Descendant[]>([
+    {
+      children: [{ text: '' }]
+    }
+  ]);
   const [textHtml, setTextHtml] = useState('');
   const [textHtmlMode] = useState('simple');
 
-  const onReset = useCallback(() => {
-    setDescendant([]);
-  }, []);
+  const editor = useMemo(() => withHistory(withReact(createEditor())), []);
+  function onReset() {
+    editor.children.map(_ => {
+      Transforms.delete(editor, { at: [0] });
+    });
+    // reset init
+    editor.children = [
+      {
+        children: [{ text: '' }]
+      }
+    ];
+    setDescendant(editor.children);
+  }
 
   const onTransform = useCallback(() => {
     const textHtml = textToTextHtml(descendant, textHtmlMode === 'simple');
@@ -29,7 +46,6 @@ export function useTransform() {
   };
 
   const onCopy = async () => {
-    console.log('11111');
     if (!textHtml) {
       toast.error('没有内容', {
         className: 'toast-error'
@@ -45,5 +61,14 @@ export function useTransform() {
     }
   };
 
-  return { textHtml, editChange, onReset, onTransform, changeTextArea, onCopy };
+  return {
+    descendant,
+    textHtml,
+    editor,
+    editChange,
+    onReset,
+    onTransform,
+    changeTextArea,
+    onCopy
+  };
 }
