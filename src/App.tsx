@@ -26,11 +26,7 @@ function App() {
                 to={`/to-text-html`}
                 className={clsx(pathname === '/to-text-html' && 'active')}
               >
-                <img
-                  className="nav-img"
-                  src="/public/sider/textHtml.svg"
-                  alt=""
-                />
+                <img className="nav-img" src="/sider/textHtml.svg" alt="" />
                 <span>To TextHtml</span>
               </Link>
             </li>
@@ -39,7 +35,7 @@ function App() {
                 to={`/to-string-json`}
                 className={clsx(pathname === '/to-string-json' && 'active')}
               >
-                <img className="nav-img" src="/public/sider/stringJson.svg" />
+                <img className="nav-img" src="/sider/stringJson.svg" />
                 <span>To StringJson</span>
               </Link>
             </li>
