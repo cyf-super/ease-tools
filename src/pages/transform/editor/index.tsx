@@ -2,7 +2,6 @@ import { useCallback, useMemo } from 'react';
 import isHotkey from 'is-hotkey';
 import {
   Editable,
-  withReact,
   useSlate,
   Slate,
   RenderElementProps,
@@ -11,13 +10,11 @@ import {
 import {
   Editor,
   Transforms,
-  createEditor,
   Descendant,
   Element as SlateElement,
   BaseEditor
 } from 'slate';
-import { withHistory } from 'slate-history';
-import { Button, Icon, Toolbar } from '@/components';
+import { Icon, Toolbar } from '@/components';
 import './style.module.scss';
 
 const HOTKEYS = {
@@ -37,7 +34,7 @@ const Edit = ({
 }: {
   onChange: (value: Descendant[]) => void;
   descendant: Descendant[];
-  editor: BaseEditor;
+  editor: any;
 }) => {
   const renderElement = useCallback(
     (props: RenderElementProps) => <Element {...props} />,
@@ -258,12 +255,5 @@ const MarkButton = ({ format, icon }: { format: string; icon: string }) => {
     ></Icon>
   );
 };
-
-const initialValue: any = [
-  {
-    type: 'paragraph',
-    children: [{ text: '1241234' }]
-  }
-];
 
 export { Edit };
