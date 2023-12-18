@@ -15,6 +15,7 @@
     "is-hotkey": "^0.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.0",
     "slate": "^0.101.1",
     "slate-history": "^0.100.0",
     "slate-react": "^0.101.3",

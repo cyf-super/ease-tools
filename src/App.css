@@ -1,9 +1,0 @@
-.toaster li {
-  border-color: var(--borderColor) !important;
-  width: 280px !important;
-}
-
-.toast-error {
-  color: red !important;
-  border-color: red !important;
-}

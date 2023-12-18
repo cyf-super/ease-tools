@@ -3,7 +3,7 @@ import styles from './index.module.scss';
 import { BaseButton } from '@/components';
 import { useTransform } from './hooks/useTransform';
 
-export function Transform() {
+export function TextTransform() {
   const {
     editor,
     descendant,
@@ -17,6 +17,7 @@ export function Transform() {
 
   return (
     <div className={styles.box}>
+      <h2>To TextHtml</h2>
       <Edit onChange={editChange} descendant={descendant} editor={editor} />
       <div className="btn">
         <BaseButton active onClick={onReset}>

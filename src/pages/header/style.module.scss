@@ -7,7 +7,18 @@
   background-color: #fff;
   backdrop-filter: saturate(180%) blur(20px);
   box-shadow: rgba(71, 75, 255, 0.075) 0px 2px 3px;
-  font-size: 20px;
+  font-size: 1.6rem;
   font-weight: 700;
-  color: #474bff;
+  color: #000;
+
+  :global {
+    .logo {
+      width: 30px;
+      height: 30px;
+    }
+    .title {
+      margin-left: 10px;
+      line-height: 64px;
+    }
+  }
 }
