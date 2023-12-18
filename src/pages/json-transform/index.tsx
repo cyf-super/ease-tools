@@ -19,10 +19,14 @@ export function JsonTransform() {
           ></textarea>
         </div>
         <div className="btn">
-          <BaseButton active onClick={onReset}>
+          <BaseButton disabled={!json} onClick={onReset}>
             Reset
           </BaseButton>
-          <BaseButton active className="btn-copy" onClick={onCopy}>
+          <BaseButton
+            disabled={!stringjson}
+            className="btn-copy"
+            onClick={onCopy}
+          >
             Copy
           </BaseButton>
         </div>

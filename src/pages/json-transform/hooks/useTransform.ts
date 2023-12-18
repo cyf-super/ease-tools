@@ -7,7 +7,6 @@ export function useTransform() {
 
   const changeJson = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setJson(e.target.value);
-    console.log('🚀 ~ changeJson ~ e.target.value:', typeof e.target.value);
   };
   const changeStringjson = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setStringJson(e.target.value);
@@ -23,7 +22,9 @@ export function useTransform() {
       const str = JSON.stringify(formatJson);
       const strJson = str.replaceAll('"', '\\"');
       setStringJson(strJson);
-    } catch (e) {}
+    } catch (e) {
+      toast.error('json格式错误');
+    }
   }, [json]);
 
   const onReset = () => {

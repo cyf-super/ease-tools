@@ -15,18 +15,24 @@ export function TextTransform() {
     onReset
   } = useTransform();
 
+  const disabled = !descendant[0]?.children[0].text;
+
   return (
     <div className={styles.box}>
       <h2>To TextHtml</h2>
       <Edit onChange={editChange} descendant={descendant} editor={editor} />
       <div className="btn">
-        <BaseButton active onClick={onReset}>
+        <BaseButton disabled={disabled} onClick={onReset}>
           Reset
         </BaseButton>
-        <BaseButton active className="btn-texthtml" onClick={onTransform}>
+        <BaseButton
+          disabled={disabled}
+          className="btn-texthtml"
+          onClick={onTransform}
+        >
           To textHtml
         </BaseButton>
-        <BaseButton active className="btn-copy" onClick={onCopy}>
+        <BaseButton disabled={!textHtml} className="btn-copy" onClick={onCopy}>
           Copy
         </BaseButton>
       </div>

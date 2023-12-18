@@ -1,9 +1,20 @@
 import './App.scss';
+import { useEffect } from 'react';
 import { Header } from './pages/header';
 import { Toaster } from 'sonner';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
+import clsx from 'clsx';
 
 function App() {
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (pathname === '/') {
+      navigate('/to-text-html');
+    }
+  }, [pathname, navigate]);
+
   return (
     <>
       <Header />
@@ -11,7 +22,10 @@ function App() {
         <nav className="nav">
           <ul>
             <li>
-              <Link to={`/to-text-html`}>
+              <Link
+                to={`/to-text-html`}
+                className={clsx(pathname === '/to-text-html' && 'active')}
+              >
                 <img
                   className="nav-img"
                   src="/public/sider/textHtml.svg"
@@ -21,7 +35,10 @@ function App() {
               </Link>
             </li>
             <li>
-              <Link to={`/to-string-json`}>
+              <Link
+                to={`/to-string-json`}
+                className={clsx(pathname === '/to-string-json' && 'active')}
+              >
                 <img className="nav-img" src="/public/sider/stringJson.svg" />
                 <span>To StringJson</span>
               </Link>

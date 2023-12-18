@@ -6,7 +6,7 @@ import { JsonTransform } from '../pages/json-transform';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/:id?',
     element: <App />,
     errorElement: <ErrorPage />,
     children: [

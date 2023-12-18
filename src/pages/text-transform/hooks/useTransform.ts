@@ -7,7 +7,7 @@ import { createEditor, Transforms } from 'slate';
 import { withHistory } from 'slate-history';
 
 export function useTransform() {
-  const [descendant, setDescendant] = useState<Descendant[]>([
+  const [descendant, setDescendant] = useState<any[]>([
     {
       children: [{ text: '' }]
     }

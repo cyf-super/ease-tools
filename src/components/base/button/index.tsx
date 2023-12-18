@@ -4,8 +4,7 @@ import styles from './style.module.scss';
 import clsx from 'clsx';
 
 type ButtonType = PropsWithChildren<{
-  active?: boolean;
-  disabled?: string;
+  disabled?: boolean;
 }> &
   BaseProps;
 
@@ -17,7 +16,7 @@ export const BaseButton = function ({
   return (
     <button
       {...props}
-      className={clsx(styles.button, className, disabled)}
+      className={clsx(styles.button, className, disabled && styles.disabled)}
       style={{}}
     ></button>
   );
