@@ -5,6 +5,7 @@ import clsx from 'clsx';
 
 type ButtonType = PropsWithChildren<{
   active?: boolean;
+  disabled?: string;
 }> &
   BaseProps;
 
