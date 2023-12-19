@@ -5,6 +5,13 @@ import { Toaster } from 'sonner';
 import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 
+function getUrl(src: string) {
+  return new URL(src, import.meta.url).href;
+}
+
+const textHtmlUrl = new URL('/sider/textHtml.svg', import.meta.url).href;
+const stringJsonUrl = new URL('/sider/stringJson.svg', import.meta.url).href;
+
 function App() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -23,19 +30,21 @@ function App() {
           <ul>
             <li>
               <Link
-                to={`/to-text-html`}
-                className={clsx(pathname === '/to-text-html' && 'active')}
+                to={`/ease-tools/to-text-html`}
+                className={clsx(
+                  pathname === '/ease-tools/to-text-html' && 'active'
+                )}
               >
-                <img className="nav-img" src="/sider/textHtml.svg" alt="" />
+                <img className="nav-img" src={textHtmlUrl} alt="" />
                 <span>To TextHtml</span>
               </Link>
             </li>
             <li>
               <Link
-                to={`/to-string-json`}
+                to={getUrl(`/ease-tools/to-string-json`)}
                 className={clsx(pathname === '/to-string-json' && 'active')}
               >
-                <img className="nav-img" src="/sider/stringJson.svg" />
+                <img className="nav-img" src={stringJsonUrl} />
                 <span>To StringJson</span>
               </Link>
             </li>
