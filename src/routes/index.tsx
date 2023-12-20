@@ -12,12 +12,12 @@ const router = createBrowserRouter(
       errorElement: <ErrorPage />,
       children: [
         {
-          path: 'to-text-html',
-          element: <TextTransform />
-        },
-        {
           path: 'to-string-json',
           element: <JsonTransform />
+        },
+        {
+          path: 'to-text-html',
+          element: <TextTransform />
         }
       ]
     }
