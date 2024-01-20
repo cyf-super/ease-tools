@@ -1,10 +1,10 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createHashRouter } from 'react-router-dom';
 import App from '../App';
 import ErrorPage from '../error-page';
 import { TextTransform } from '../pages/text-transform';
 import { JsonTransform } from '../pages/json-transform';
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   [
     {
       path: '/:id?',
@@ -23,7 +23,7 @@ const router = createBrowserRouter(
     }
   ],
   {
-    basename: '/ease-tools'
+    // basename: '/ease-tools'
   }
 );
 

@@ -30,10 +30,8 @@ function App() {
           <ul>
             <li>
               <Link
-                to={`/ease-tools/to-text-html`}
-                className={clsx(
-                  pathname === '/ease-tools/to-text-html' && 'active'
-                )}
+                to={`/to-text-html`}
+                className={clsx(pathname === '/to-text-html' && 'active')}
               >
                 <img className="nav-img" src={textHtmlUrl} alt="" />
                 <span>To TextHtml</span>
@@ -41,7 +39,7 @@ function App() {
             </li>
             <li>
               <Link
-                to={getUrl(`/ease-tools/to-string-json`)}
+                to={getUrl(`/to-string-json`)}
                 className={clsx(pathname === '/to-string-json' && 'active')}
               >
                 <img className="nav-img" src={stringJsonUrl} />
