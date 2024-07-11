@@ -13,3 +13,11 @@ pnpm install
 
 pnpm dev
 ```
+
+## 部署
+
+```
+pnpm build
+
+npm run deploy
+```
