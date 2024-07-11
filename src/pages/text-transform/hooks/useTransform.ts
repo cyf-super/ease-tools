@@ -6,14 +6,20 @@ import { withReact } from 'slate-react';
 import { createEditor, Transforms } from 'slate';
 import { withHistory } from 'slate-history';
 
+export interface Item {
+  title: string;
+  detail: string;
+}
+
 export function useTransform() {
   const [descendant, setDescendant] = useState<any[]>([
     {
       children: [{ text: '' }]
     }
   ]);
-  const [textHtml, setTextHtml] = useState('');
+  const [textHtmlList, setTextHtmlList] = useState<Item[]>([]);
   const [textHtmlMode] = useState('simple');
+  const [isTitle, setIsTitle] = useState(true);
 
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
   function onReset() {
@@ -30,9 +36,13 @@ export function useTransform() {
   }
 
   const onTransform = useCallback(() => {
-    const textHtml = textToTextHtml(descendant, textHtmlMode === 'simple');
-    setTextHtml(textHtml);
-  }, [descendant, textHtmlMode]);
+    const textHtmlList = textToTextHtml(
+      descendant,
+      isTitle,
+      textHtmlMode === 'simple'
+    );
+    setTextHtmlList(textHtmlList);
+  }, [descendant, textHtmlMode, isTitle]);
 
   const editChange = useCallback(
     (val: Descendant[]) => {
@@ -41,19 +51,19 @@ export function useTransform() {
     [setDescendant]
   );
 
-  const changeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setTextHtml(e.target.value);
+  const changeCheckBox = (e: ChangeEvent<HTMLInputElement>) => {
+    setIsTitle(e.target.checked);
   };
 
-  const onCopy = async () => {
-    if (!textHtml) {
+  const onCopy = async (text: string) => {
+    if (!text) {
       toast.error('没有内容', {
         className: 'toast-error'
       });
       return;
     }
     try {
-      await navigator.clipboard.writeText(textHtml);
+      await navigator.clipboard.writeText(text);
       toast.success('已复制');
     } catch (err) {
       console.error('Failed to copy: ', err);
@@ -62,13 +72,14 @@ export function useTransform() {
   };
 
   return {
+    isTitle,
     descendant,
-    textHtml,
+    textHtmlList,
     editor,
+    changeCheckBox,
     editChange,
     onReset,
     onTransform,
-    changeTextArea,
     onCopy
   };
 }

@@ -5,10 +5,33 @@
 }
 
 .box {
-  margin: 0 auto;
-  width: 60%;
+  margin-inline: 50px 20px;
 
   :global {
+    .content {
+      display: flex;
+      .left {
+        width: 60%;
+      }
+      .right {
+        display: flex;
+        align-items: center;
+        margin: 10px 0 0 40px;
+        font-size: 18px;
+        height: 30px;
+
+        input {
+          width: 20px;
+          height: 20px;
+          margin-right: 5px;
+          cursor: pointer;
+        }
+        label {
+          cursor: pointer;
+        }
+      }
+    }
+
     .btn {
       margin-top: 25px;
       text-align: center;
@@ -20,24 +43,35 @@
       &-texthtml {
         @include primary;
       }
+      &-small {
+        width: 90px;
+        height: 40px;
+      }
     }
 
     .texthtml {
       margin-top: 25px;
       &-title {
         margin-bottom: 2px;
-        font-size: 12px;
+        font-size: 18px;
         color: rgb(99, 99, 136);
+        cursor: pointer;
+      }
+      &-content {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
       }
       &-textarea {
-        width: 100%;
-        height: 320px;
+        width: 60%;
+        height: 150px;
         padding: 15px;
         resize: none;
         border-radius: 8px;
         border-color: #a3a5ff;
         font-size: 17px;
         outline: none;
+        margin-right: 20px;
 
         &:focus {
           box-shadow: #deeafa 0px 10px 15px -3px, #cccdff 0px 4px 6px -2px;

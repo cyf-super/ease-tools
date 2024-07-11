@@ -6,46 +6,92 @@ import { useTransform } from './hooks/useTransform';
 export function TextTransform() {
   const {
     editor,
+    isTitle,
     descendant,
-    textHtml,
+    textHtmlList,
     onTransform,
     editChange,
-    changeTextArea,
+    changeCheckBox,
     onCopy,
     onReset
   } = useTransform();
 
   const disabled = !descendant[0]?.children[0].text;
 
-  return (
-    <div className={styles.box}>
-      <h2>To TextHtml</h2>
-      <Edit onChange={editChange} descendant={descendant} editor={editor} />
-      <div className="btn">
-        <BaseButton disabled={disabled} onClick={onReset}>
-          Reset
-        </BaseButton>
-        <BaseButton
-          disabled={disabled}
-          className="btn-texthtml"
-          onClick={onTransform}
-        >
-          To textHtml
-        </BaseButton>
-        <BaseButton disabled={!textHtml} className="btn-copy" onClick={onCopy}>
-          Copy
-        </BaseButton>
-      </div>
+  const textHtml = textHtmlList.reduce((html, item) => {
+    return (html += item?.detail), html;
+  }, '');
 
-      <div className="texthtml">
-        <div className="texthtml-title">Texthtml View</div>
-        <textarea
-          className="texthtml-textarea"
-          value={textHtml}
-          onChange={changeTextArea}
-        ></textarea>
+  return (
+    <>
+      <div className={styles.box}>
+        <h2>To TextHtml</h2>
+        <div className="content">
+          <div className="left">
+            <Edit
+              onChange={editChange}
+              descendant={descendant}
+              editor={editor}
+            />
+            <div className="btn">
+              <BaseButton disabled={disabled} onClick={onReset}>
+                Reset
+              </BaseButton>
+              <BaseButton
+                disabled={disabled}
+                className="btn-texthtml"
+                onClick={onTransform}
+              >
+                To textHtml
+              </BaseButton>
+              <BaseButton
+                disabled={!textHtml}
+                className="btn-copy"
+                onClick={() => onCopy(textHtml)}
+              >
+                Copy
+              </BaseButton>
+            </div>
+          </div>
+          <div className="right">
+            <input
+              type="checkbox"
+              id="checkbox"
+              checked={isTitle}
+              onChange={changeCheckBox}
+            />
+            <label htmlFor="checkbox">第一行是否为标题</label>
+          </div>
+        </div>
+
+        <div className="texthtml">
+          {textHtmlList.map(item => (
+            <div>
+              <div
+                className="texthtml-title"
+                onClick={() => onCopy(item.title)}
+              >
+                {item.title || 'Texthtml View'}
+              </div>
+              <div className="texthtml-content">
+                <textarea
+                  onClick={() => onCopy(item.detail)}
+                  className="texthtml-textarea"
+                  value={item.detail}
+                ></textarea>
+                <BaseButton
+                  disabled={!item.detail}
+                  className="btn-small"
+                  onClick={() => onCopy(item.detail)}
+                >
+                  Copy
+                </BaseButton>
+              </div>
+            </div>
+          ))}
+        </div>
+        {/* <div dangerouslySetInnerHTML={{ __html: textHtml }}></div> */}
       </div>
-      <div dangerouslySetInnerHTML={{ __html: textHtml }}></div>
-    </div>
+    </>
   );
 }
