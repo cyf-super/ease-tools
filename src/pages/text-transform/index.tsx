@@ -74,11 +74,12 @@ export function TextTransform() {
                 {item.title || 'Texthtml View'}
               </div>
               <div className="texthtml-content">
-                <textarea
+                <div
                   onClick={() => onCopy(item.detail)}
                   className="texthtml-textarea"
-                  value={item.detail}
-                ></textarea>
+                >
+                  {item.detail}
+                </div>
                 <BaseButton
                   disabled={!item.detail}
                   className="btn-small"
@@ -90,7 +91,14 @@ export function TextTransform() {
             </div>
           ))}
         </div>
-        {/* <div dangerouslySetInnerHTML={{ __html: textHtml }}></div> */}
+
+        {textHtmlList.length ? <h3>预览</h3> : null}
+        {textHtmlList.map(item => (
+          <div className="innerHTML">
+            <div>{item.title}</div>
+            <div dangerouslySetInnerHTML={{ __html: item.detail }}></div>
+          </div>
+        ))}
       </div>
     </>
   );

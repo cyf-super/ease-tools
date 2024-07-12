@@ -72,6 +72,9 @@
         font-size: 17px;
         outline: none;
         margin-right: 20px;
+        border: 1px solid #484bf5;
+        border-radius: 5px;
+        overflow-y: scroll;
 
         &:focus {
           box-shadow: #deeafa 0px 10px 15px -3px, #cccdff 0px 4px 6px -2px;
@@ -90,6 +93,10 @@
           border-radius: 25px;
         }
       }
+    }
+
+    .innerHTML {
+      margin-top: 10px;
     }
   }
 }
