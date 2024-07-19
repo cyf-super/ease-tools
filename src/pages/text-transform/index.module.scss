@@ -8,26 +8,44 @@
   margin-inline: 50px 20px;
 
   :global {
+    .inputTitle {
+      width: 400px;
+      height: 40px;
+      outline: none;
+      border: 1px solid rgb(187, 187, 222);
+      border-radius: 8px;
+      font-size: 22px;
+      padding-left: 8px;
+      box-shadow: #deeafa 0px 10px 15px -3px, #cccdff 0px 4px 6px -2px;
+      margin-bottom: 20px;
+    }
     .content {
       display: flex;
       .left {
         width: 60%;
       }
       .right {
-        display: flex;
-        align-items: center;
         margin: 10px 0 0 40px;
         font-size: 18px;
         height: 30px;
-
-        input {
-          width: 20px;
-          height: 20px;
-          margin-right: 5px;
-          cursor: pointer;
+        .option {
+          display: flex;
+          align-items: center;
+          input {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            cursor: pointer;
+          }
+          label {
+            cursor: pointer;
+          }
         }
-        label {
-          cursor: pointer;
+
+        .handleBtn {
+          margin-top: 20px;
+          display: flex;
+          align-items: center;
         }
       }
     }

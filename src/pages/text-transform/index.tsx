@@ -9,11 +9,14 @@ export function TextTransform() {
     isTitle,
     descendant,
     textHtmlList,
+    title,
     onTransform,
     editChange,
     changeCheckBox,
     onCopy,
-    onReset
+    onReset,
+    onDownload,
+    setTtile
   } = useTransform();
 
   const disabled = !descendant[0]?.children[0].text;
@@ -26,6 +29,13 @@ export function TextTransform() {
     <>
       <div className={styles.box}>
         <h2>To TextHtml</h2>
+        <input
+          className="inputTitle"
+          placeholder="请输入文档标题～"
+          type="text"
+          value={title}
+          onChange={e => setTtile(e.target.value)}
+        />
         <div className="content">
           <div className="left">
             <Edit
@@ -46,32 +56,33 @@ export function TextTransform() {
               </BaseButton>
               <BaseButton
                 disabled={!textHtml}
-                className="btn-copy"
-                onClick={() => onCopy(textHtml)}
+                // className="btn-texthtml"
+                onClick={onDownload}
               >
-                Copy
+                下载 json
               </BaseButton>
             </div>
           </div>
           <div className="right">
-            <input
-              type="checkbox"
-              id="checkbox"
-              checked={isTitle}
-              onChange={changeCheckBox}
-            />
-            <label htmlFor="checkbox">第一行是否为标题</label>
+            <div className="option">
+              <input
+                type="checkbox"
+                id="checkbox"
+                checked={isTitle}
+                onChange={changeCheckBox}
+              />
+              <label htmlFor="checkbox">第一行是否为标题</label>
+            </div>
+
+            <div className="handleBtn"></div>
           </div>
         </div>
 
         <div className="texthtml">
           {textHtmlList.map(item => (
             <div>
-              <div
-                className="texthtml-title"
-                onClick={() => onCopy(item.title)}
-              >
-                {item.title || 'Texthtml View'}
+              <div className="texthtml-title" onClick={() => onCopy(item.name)}>
+                {item.name || 'Texthtml View'}
               </div>
               <div className="texthtml-content">
                 <div
@@ -95,7 +106,7 @@ export function TextTransform() {
         {textHtmlList.length ? <h3>预览</h3> : null}
         {textHtmlList.map(item => (
           <div className="innerHTML">
-            <div>{item.title}</div>
+            <div>{item.name}</div>
             <div dangerouslySetInnerHTML={{ __html: item.detail }}></div>
           </div>
         ))}

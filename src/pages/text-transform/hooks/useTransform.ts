@@ -7,7 +7,8 @@ import { createEditor, Transforms } from 'slate';
 import { withHistory } from 'slate-history';
 
 export interface Item {
-  title: string;
+  name: string;
+  image: string;
   detail: string;
 }
 
@@ -20,6 +21,7 @@ export function useTransform() {
   const [textHtmlList, setTextHtmlList] = useState<Item[]>([]);
   const [textHtmlMode] = useState('simple');
   const [isTitle, setIsTitle] = useState(true);
+  const [title, setTtile] = useState('');
 
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
   function onReset() {
@@ -39,10 +41,11 @@ export function useTransform() {
     const textHtmlList = textToTextHtml(
       descendant,
       isTitle,
+      title,
       textHtmlMode === 'simple'
     );
     setTextHtmlList(textHtmlList);
-  }, [descendant, textHtmlMode, isTitle]);
+  }, [descendant, textHtmlMode, isTitle, title]);
 
   const editChange = useCallback(
     (val: Descendant[]) => {
@@ -71,15 +74,30 @@ export function useTransform() {
     }
   };
 
+  const onDownload = () => {
+    const blob = new Blob([JSON.stringify(textHtmlList, null, 2)], {
+      type: 'text/plain'
+    });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = (title || 'config') + '.json';
+    a.click();
+    window.URL.revokeObjectURL(url);
+  };
+
   return {
     isTitle,
     descendant,
     textHtmlList,
     editor,
+    title,
+    setTtile,
     changeCheckBox,
     editChange,
     onReset,
     onTransform,
-    onCopy
+    onCopy,
+    onDownload
   };
 }
