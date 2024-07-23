@@ -25,17 +25,22 @@ export function TextTransform() {
     return (html += item?.detail), html;
   }, '');
 
+  console.log('textHtmlList ', textHtmlList);
+
   return (
     <>
       <div className={styles.box}>
         <h2>To TextHtml</h2>
-        <input
-          className="inputTitle"
-          placeholder="请输入文档标题～"
-          type="text"
-          value={title}
-          onChange={e => setTtile(e.target.value)}
-        />
+        <div className="titleInput">
+          <input
+            className="input"
+            placeholder="请输入文档标题～"
+            type="text"
+            value={title}
+            onChange={e => setTtile(e.target.value)}
+          />
+          <span className="delIcon" onClick={() => setTtile('')}></span>
+        </div>
         <div className="content">
           <div className="left">
             <Edit
@@ -79,8 +84,8 @@ export function TextTransform() {
         </div>
 
         <div className="texthtml">
-          {textHtmlList.map(item => (
-            <div>
+          {textHtmlList.map((item, index) => (
+            <div key={index}>
               <div className="texthtml-title" onClick={() => onCopy(item.name)}>
                 {item.name || 'Texthtml View'}
               </div>

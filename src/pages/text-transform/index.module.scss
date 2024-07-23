@@ -8,17 +8,39 @@
   margin-inline: 50px 20px;
 
   :global {
-    .inputTitle {
-      width: 400px;
-      height: 40px;
-      outline: none;
-      border: 1px solid rgb(187, 187, 222);
-      border-radius: 8px;
-      font-size: 22px;
-      padding-left: 8px;
-      box-shadow: #deeafa 0px 10px 15px -3px, #cccdff 0px 4px 6px -2px;
-      margin-bottom: 20px;
+    .titleInput {
+      position: relative;
+      .input {
+        width: 350px;
+        height: 40px;
+        outline: none;
+        border: 1px solid rgb(187, 187, 222);
+        border-radius: 8px;
+        font-size: 22px;
+        font-weight: 500;
+        padding-left: 8px;
+        box-shadow: #deeafa 0px 5px 10px -3px, #cccdff 0px 4px 6px -2px;
+        margin-bottom: 20px;
+        &:focus-within {
+          box-shadow: #deeafa 0px 10px 15px -3px, #cccdff 0px 4px 6px -2px;
+        }
+      }
+      .delIcon {
+        position: absolute;
+        top: 10px;
+        left: 328px;
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        background: url(./img/delete.png) center/100% 100% no-repeat;
+        cursor: pointer;
+        &:hover {
+          transform: scale(1.3);
+          transition: all 0.1s;
+        }
+      }
     }
+
     .content {
       display: flex;
       .left {

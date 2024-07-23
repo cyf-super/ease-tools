@@ -14,7 +14,7 @@ function getDomByText(text: string, type: keyof typeof STYLE_TYPE) {
 export function textToTextHtml(
   descendant: unknown,
   isTitle: boolean,
-  title = 'XXXX',
+  title: string,
   isSimple = true
 ) {
   const textHtml = (descendant as Descendant[]).map(item => {
@@ -42,7 +42,7 @@ export function textToTextHtml(
   let previous = false;
   textHtml.forEach(text => {
     if (text === '[图片]<br />') {
-      htmlArr.push(getHtmlObj(item, isTitle, title));
+      item && htmlArr.push(getHtmlObj(item, isTitle, title));
       item = '';
       previous = true;
     } else if (text === '<br />' && previous) {
@@ -62,7 +62,7 @@ function getHtmlObj(textHtml: string, isTitle: boolean, title: string) {
   if (isTitle) {
     const arr = textHtml.split('<br />');
     const name = arr.shift()!;
-    const image = `/hh-sh/img/list/${title}/${name}.jpg`;
+    const image = `/hh-sh/img/list/${title || 'config'}/${name}.jpg`;
     const detail = arr.join('<br />');
     return {
       name,

@@ -19,7 +19,7 @@ import './style.module.scss';
 
 const HOTKEYS = {
   'mod+b': 'bold',
-  'mod+i': 'italic',
+  // 'mod+i': 'italic',
   'mod+u': 'underline',
   'mod+`': 'code'
 } as const;
@@ -53,7 +53,7 @@ const Edit = ({
     <Slate editor={editor} initialValue={descendant} onChange={onChange}>
       <Toolbar>
         <MarkButton format="bold" icon="format_bold" />
-        <MarkButton format="italic" icon="format_italic" />
+        {/* <MarkButton format="italic" icon="format_italic" /> */}
         <MarkButton format="underline" icon="format_underlined" />
         <MarkButton format="code" icon="code" />
         <BlockButton format="heading-one" icon="looks_one" />
