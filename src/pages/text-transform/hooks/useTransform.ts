@@ -1,5 +1,5 @@
-import { textToTextHtml } from '@/pages/utils';
-import { useState, useMemo, useCallback, ChangeEvent } from 'react';
+import { textToTextHtml, validateAndCreateRegex } from '@/pages/utils';
+import { useState, useMemo, useCallback, ChangeEvent, useRef } from 'react';
 import { Descendant } from 'slate';
 import { toast } from 'sonner';
 import { withReact } from 'slate-react';
@@ -22,6 +22,12 @@ export function useTransform() {
   const [textHtmlMode] = useState('simple');
   const [isTitle, setIsTitle] = useState(true);
   const [title, setTtile] = useState('');
+
+  const [regular, setRegular] = useState('/\\d+\\.\\s/');
+  const [regularNum, setRegularNum] = useState(0);
+  const [regularError, setRegularError] = useState(false);
+
+  const headerInputRef = useRef<HTMLInputElement | null>(null);
 
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
   function onReset() {
@@ -86,12 +92,23 @@ export function useTransform() {
     window.URL.revokeObjectURL(url);
   };
 
+  const onChangeRegular = (value: string) => {
+    const res = validateAndCreateRegex(value);
+    setRegular(value);
+    setRegularError(res.valid);
+  };
+
   return {
     isTitle,
     descendant,
     textHtmlList,
     editor,
     title,
+    regular,
+    regularNum,
+    regularError,
+    headerInputRef,
+    onChangeRegular,
     setTtile,
     changeCheckBox,
     editChange,

@@ -10,6 +10,11 @@ export function TextTransform() {
     descendant,
     textHtmlList,
     title,
+    regular,
+    headerInputRef,
+    regularNum,
+    regularError,
+    onChangeRegular,
     onTransform,
     editChange,
     changeCheckBox,
@@ -25,7 +30,7 @@ export function TextTransform() {
     return (html += item?.detail), html;
   }, '');
 
-  console.log('textHtmlList ', textHtmlList);
+  console.log('textHtmlList ', descendant);
 
   return (
     <>
@@ -38,8 +43,15 @@ export function TextTransform() {
             type="text"
             value={title}
             onChange={e => setTtile(e.target.value)}
+            ref={headerInputRef}
           />
-          <span className="delIcon" onClick={() => setTtile('')}></span>
+          <span
+            className="delIcon"
+            onClick={() => {
+              setTtile('');
+              headerInputRef.current?.focus();
+            }}
+          ></span>
         </div>
         <div className="content">
           <div className="left">
@@ -59,11 +71,7 @@ export function TextTransform() {
               >
                 To textHtml
               </BaseButton>
-              <BaseButton
-                disabled={!textHtml}
-                // className="btn-texthtml"
-                onClick={onDownload}
-              >
+              <BaseButton disabled={!textHtml} onClick={onDownload}>
                 下载 json
               </BaseButton>
             </div>
@@ -79,7 +87,32 @@ export function TextTransform() {
               <label htmlFor="checkbox">第一行是否为标题</label>
             </div>
 
-            <div className="handleBtn"></div>
+            <div className="regularHandle">
+              <p>正则清除</p>
+              <div className="regularInput">
+                <label className="regularLabel" form="regularLabel">
+                  正则表达式
+                </label>
+                <input
+                  type="text"
+                  id="regularLabel"
+                  placeholder="正则表达式"
+                  value={regular}
+                  onChange={e => onChangeRegular(e.target.value)}
+                />
+                <span
+                  className={['error', regularError ? 'showErorr' : ''].join(
+                    ' '
+                  )}
+                >
+                  非法的正则
+                </span>
+              </div>
+              <div className="">
+                <span className="size">匹配数量：{regularNum}</span>
+              </div>
+              <button className="clearBtn">清除</button>
+            </div>
           </div>
         </div>
 

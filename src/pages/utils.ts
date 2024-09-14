@@ -76,3 +76,13 @@ function getHtmlObj(textHtml: string, isTitle: boolean, title: string) {
     detail: textHtml
   };
 }
+
+// 校验正则表达式
+export function validateAndCreateRegex(pattern: string) {
+  try {
+    const regex = new RegExp(pattern);
+    return { valid: true, regex: regex };
+  } catch (e: any) {
+    return { valid: false, error: e.message };
+  }
+}
